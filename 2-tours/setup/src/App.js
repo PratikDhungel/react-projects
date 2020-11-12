@@ -26,9 +26,13 @@ function App() {
   }, []);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div style={{ marginTop: '50px' }}>
+        <Loading />
+      </div>
+    );
   }
-  return <Tours />;
+  return <Tours tours={data} />;
 }
 
 export default App;
