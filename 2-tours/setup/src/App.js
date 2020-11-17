@@ -7,6 +7,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
+  const removeTour = (id) => {
+    const newData = data.filter((tour) => tour.id !== id);
+    setData(newData);
+  };
+
   const fetchData = async () => {
     setIsLoading(true);
     try {
@@ -32,7 +37,17 @@ function App() {
       </div>
     );
   }
-  return <Tours tours={data} />;
+  if (data.length === 0) {
+    return (
+      <main className='title'>
+        <h2>No Tours Available</h2>
+        <button className='btn' onClick={() => fetchData()}>
+          Refersh
+        </button>
+      </main>
+    );
+  }
+  return <Tours tours={data} removeTour={removeTour} />;
 }
 
 export default App;

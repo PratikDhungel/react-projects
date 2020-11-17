@@ -1,6 +1,6 @@
 import React from 'react';
 import Tour from './Tour';
-const Tours = ({ tours }) => {
+const Tours = ({ tours, removeTour }) => {
   return (
     <section>
       <div className='title' style={{ marginTop: '50px' }}>
@@ -9,7 +9,7 @@ const Tours = ({ tours }) => {
       </div>
       <div>
         {tours.map((tour) => {
-          return <Tour key={tour.id} tour={tour} />;
+          return <Tour key={tour.id} tour={tour} removeTour={removeTour} />;
         })}
       </div>
     </section>
