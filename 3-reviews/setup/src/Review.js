@@ -16,12 +16,21 @@ const Review = () => {
     return currentIndex;
   };
 
+  const showRandomReview = () => {
+    let randomIndex = Math.floor(Math.random() * people.length);
+    if (randomIndex === index) {
+      randomIndex = loopReviews(randomIndex + 1);
+    }
+    setIndex(randomIndex);
+  };
+
   const prevPerson = () => {
     setIndex((index) => {
       let newIndex = index - 1;
       return loopReviews(newIndex);
     });
   };
+
   const nextPerson = () => {
     setIndex((index) => {
       let newIndex = index + 1;
@@ -48,7 +57,9 @@ const Review = () => {
           <FaChevronRight />
         </button>
       </div>
-      <button className='random-btn'>Surprise Me</button>
+      <button className='random-btn' onClick={() => showRandomReview()}>
+        Surprise Me
+      </button>
     </article>
   );
 };
