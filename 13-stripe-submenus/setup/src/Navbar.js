@@ -7,8 +7,11 @@ const Navbar = () => {
   const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext();
 
   const displaySubmenu = (e) => {
-    console.log('Hello World');
-    openSubmenu();
+    const page = e.target.textContent;
+    const tempBtn = e.target.getBoundingClientRect();
+    const center = (tempBtn.left + tempBtn.right) / 2;
+    const bottom = tempBtn.bottom - 3; // Move Submenu 3 pixels down from the bottom of the Navbar buttons
+    openSubmenu(page, { center, bottom });
   };
 
   return (
