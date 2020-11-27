@@ -8,6 +8,7 @@ const Navbar = () => {
 
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
+    console.log(page);
     const tempBtn = e.target.getBoundingClientRect();
     const center = (tempBtn.left + tempBtn.right) / 2;
     const bottom = tempBtn.bottom - 3; // Move Submenu 3 pixels down from the bottom of the Navbar buttons
