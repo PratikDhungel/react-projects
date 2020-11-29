@@ -32,6 +32,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'DECREASE_COUNT', payload: item_id });
   };
 
+  const toggleAmount = (item_id, type) => {
+    dispatch({ type: 'TOGGLE_AMOUNT', payload: { item_id, type } });
+  };
+
   const fetchData = async () => {
     dispatch({ type: 'LOADING' });
     const response = await fetch(url);
@@ -48,7 +52,7 @@ const AppProvider = ({ children }) => {
   }, [state.cart]);
 
   return (
-    <AppContext.Provider value={{ ...state, clearCart, removeItem, increaseCount, decreaseCount }}>
+    <AppContext.Provider value={{ ...state, clearCart, removeItem, increaseCount, decreaseCount, toggleAmount }}>
       {children}
     </AppContext.Provider>
   );
