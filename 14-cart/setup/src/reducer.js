@@ -19,6 +19,18 @@ const reducer = (state, action) => {
   }
 
   if (action.type === 'DECREASE_COUNT') {
+    const newCartItems = state.cart
+      .map((cartItem) => {
+        if (cartItem.id === action.payload) {
+          if (cartItem.amount < 1) {
+            return {};
+          }
+          return { ...cartItem, amount: cartItem.amount - 1 };
+        }
+        return cartItem;
+      })
+      .filter((cartItem) => cartItem.amount > 0);
+    return { ...state, cart: newCartItems };
   }
 
   return state;
