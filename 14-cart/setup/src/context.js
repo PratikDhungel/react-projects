@@ -25,7 +25,19 @@ const AppProvider = ({ children }) => {
     dispatch({ type: 'REMOVE_ITEM', payload: item_id });
   };
 
-  return <AppContext.Provider value={{ ...state, clearCart, removeItem }}>{children}</AppContext.Provider>;
+  const increaseCount = (item_id) => {
+    dispatch({ type: 'INCREASE_COUNT', payload: item_id });
+  };
+
+  const decreaseCount = (item_id) => {
+    dispatch({ type: 'DECREASE_COUNT', payload: item_id });
+  };
+
+  return (
+    <AppContext.Provider value={{ ...state, clearCart, removeItem, increaseCount, decreaseCount }}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 // make sure use
 export const useGlobalContext = () => {
