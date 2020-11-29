@@ -1,27 +1,35 @@
-import React, { useState, useContext, useReducer, useEffect } from 'react'
-import cartItems from './data'
-import reducer from './reducer'
+import React, { useState, useContext, useReducer, useEffect } from 'react';
+import cartItems from './data';
+import reducer from './reducer';
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
-const url = 'https://course-api.com/react-useReducer-cart-project'
-const AppContext = React.createContext()
+const url = 'https://course-api.com/react-useReducer-cart-project';
+const AppContext = React.createContext();
+
+const initialState = {
+  isLoading: false,
+  cart: cartItems,
+  total: 0,
+  amount: 0,
+};
 
 const AppProvider = ({ children }) => {
-  const [cart, setCart] = useState(cartItems)
+  // const [cart, setCart] = useState(cartItems);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  return (
-    <AppContext.Provider
-      value={{
-        cart,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
-  )
-}
+  const clearCart = () => {
+    dispatch({ type: 'CLEAR_CART' });
+  };
+
+  const removeItem = (item_id) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: item_id });
+  };
+
+  return <AppContext.Provider value={{ ...state, clearCart, removeItem }}>{children}</AppContext.Provider>;
+};
 // make sure use
 export const useGlobalContext = () => {
-  return useContext(AppContext)
-}
+  return useContext(AppContext);
+};
 
-export { AppContext, AppProvider }
+export { AppContext, AppProvider };
